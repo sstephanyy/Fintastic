@@ -24,12 +24,15 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapGet("/receita", async (DataContext context) =>
-    await context.Incomes.ToListAsync()
-).WithTags("Receita");
+{
+    var incomes = await context.Incomes.Include(i => i.Category).ToListAsync();
+    return Results.Ok(incomes);
+}).WithTags("Receita");
+
 
 app.MapGet("/receita/{id}", async (int id, DataContext context) =>
 {
-    var income = await context.Incomes.FindAsync(id);
+    var income = await context.Incomes.Include(i => i.Category).FirstOrDefaultAsync(i => i.IncomeId == id);
     if (income == null)
     {
         return Results.NotFound(new { message = "Receita não encontrada." });
