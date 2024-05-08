@@ -1,4 +1,5 @@
 using Fintastic_API.Data;
+using Fintastic_API.Endpoints;
 using Fintastic_API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,20 +41,7 @@ app.MapGet("/receita/{id}", async (int id, DataContext context) =>
     return Results.Ok(income);
 }).WithTags("Receita");
 
-app.MapPost("/receita", async (Income newIncome, DataContext context) =>
-{
-    // Verifica se a categoria existe
-    var category = await context.Categories.FindAsync(newIncome.CategoryId);
-    if (category == null)
-    {
-        return Results.NotFound(new { message = "Categoria não encontrada." });
-    }
-
-    // Se a categoria existe, prossegue com a criação do Income
-    context.Incomes.Add(newIncome);
-    await context.SaveChangesAsync();
-    return Results.Created($"/receita/{newIncome.IncomeId}", newIncome);
-}).WithTags("Receita");
+app.MapPost("/receita", IncomesEndpointsV1.AddIncome).WithTags("Receita");
 
 
 app.MapPut("/receita/{id}", async (int id, DataContext context, Income income) =>
@@ -83,4 +71,5 @@ app.MapDelete("/receita/{id}", async (int id, DataContext context) =>
 }).WithTags("Receita");
 
 app.Run();
+
 
