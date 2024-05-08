@@ -1,5 +1,6 @@
 using Fintastic_API.Data;
 using Fintastic_API.Models;
+using Fintastic_API.Routes;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScopped<IService<Spent>, SpentService>();
 
 var app = builder.Build();
 
@@ -133,6 +136,8 @@ app.MapDelete("/receita/{id}", async (int id, DataContext context) =>
         ? Results.NoContent()
         : Results.BadRequest("Não foi possível deletar o registro.");
 }).WithTags("Receita");
+
+app.MapSpentRoutes();
 
 app.Run();
 
