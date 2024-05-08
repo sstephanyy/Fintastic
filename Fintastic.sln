@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintastic_API", "Fintastic_API\Fintastic_API.csproj", "{2E675991-C1B6-4661-90FD-5EC493C9B141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fintastic_API", "Fintastic_API\Fintastic_API.csproj", "{2E675991-C1B6-4661-90FD-5EC493C9B141}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{15EBD6FF-6040-4CF2-8BAD-0708D338E02C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minimal.Tests", "Minimal.Tests\Minimal.Tests.csproj", "{AD88FF73-9DAD-4F1C-90D0-0E47248789E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{2E675991-C1B6-4661-90FD-5EC493C9B141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E675991-C1B6-4661-90FD-5EC493C9B141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E675991-C1B6-4661-90FD-5EC493C9B141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD88FF73-9DAD-4F1C-90D0-0E47248789E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD88FF73-9DAD-4F1C-90D0-0E47248789E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD88FF73-9DAD-4F1C-90D0-0E47248789E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD88FF73-9DAD-4F1C-90D0-0E47248789E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD88FF73-9DAD-4F1C-90D0-0E47248789E6} = {15EBD6FF-6040-4CF2-8BAD-0708D338E02C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1148E16F-3512-4627-A7EC-96D579120A51}
