@@ -81,55 +81,7 @@ app.MapDelete("/categoria/{id}", async (int id, DataContext context) =>
 }).WithTags("Categoria");
 
 
-
-// ==================> INCOME CRUD <=====================
-
-app.MapGet("/receita", async (DataContext context) =>
-{
-    var incomes = await context.Incomes.Include(i => i.Category).ToListAsync();
-    return Results.Ok(incomes);
-}).WithTags("Receita");
-
-
-app.MapGet("/receita/{id}", async (int id, DataContext context) =>
-{
-    var income = await context.Incomes.Include(i => i.Category).FirstOrDefaultAsync(i => i.IncomeId == id);
-    if (income == null)
-    {
-        return Results.NotFound(new { message = "Receita não encontrada." });
-    }
-    return Results.Ok(income);
-}).WithTags("Receita");
-
-app.MapPost("/receita", IncomesEndpointsV1.AddIncome).WithTags("Receita");
-
-
-app.MapPut("/receita/{id}", async (int id, DataContext context, Income income) =>
-{
-    var incomeBanco = await context.Incomes.AsNoTracking<Income>().FirstOrDefaultAsync(f=>f.IncomeId == id);
-    if(incomeBanco == null) return Results.NotFound();
-
-    context.Incomes.Update(income);
-    var result = await context.SaveChangesAsync();
-
-    return result > 0
-        ? Results.NoContent()
-        : Results.BadRequest("Não foi possível atualizar o registro.");
-}).WithTags("Receita");
-
-app.MapDelete("/receita/{id}", async (int id, DataContext context) =>
-{
-    var income = await context.Incomes.FindAsync(id);
-    if (income == null) return Results.NotFound();
-
-    context.Incomes.Remove(income);
-    var result = await context.SaveChangesAsync();
-
-    return result > 0
-        ? Results.NoContent()
-        : Results.BadRequest("Não foi possível deletar o registro.");
-}).WithTags("Receita");
-
+app.MapIncomeRoutes();
 app.MapSpentRoutes();
 
 app.Run();
