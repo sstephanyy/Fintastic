@@ -1,7 +1,7 @@
 using Fintastic_API.Data;
-using Fintastic_API.Endpoints;
 using Fintastic_API.Models;
 using Fintastic_API.Routes;
+using Fintastic_API.Service;
 using Fintastic_API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +17,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IService<Spent>, SpentService>();
+builder.Services.AddScoped<IService<Income>, IncomeService>();
 
 var app = builder.Build();
 

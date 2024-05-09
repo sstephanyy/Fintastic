@@ -17,16 +17,25 @@ namespace Fintastic_API.Service
 
         public async Task<IEnumerable<Income>> GetRegisters()
         {
+            var incomes = await _db.Incomes.Include(i => i.Category).ToListAsync();
             return  _db.Incomes;
         }
 
         public async Task<Income> GetRegisterById(int id)
         {
+            var income = await _db.Incomes.Include(i => i.Category).FirstOrDefaultAsync(i => i.IncomeId == id);
             return await _db.Incomes.FirstOrDefaultAsync(x => x.IncomeId == id);
         }
 
         public async Task AddRegister(Income income)
         {
+            var category = await _db.Categories.FindAsync(income.CategoryId);
+            if (category == null)
+            {
+                throw new Exception("Categoria não existe.");
+
+            }
+
             await _db.Incomes.AddAsync(income);
             await _db.SaveChangesAsync();
         }
