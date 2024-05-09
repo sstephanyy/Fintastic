@@ -11,6 +11,7 @@ namespace Fintastic_API.Data
         }
 
         public DbSet<Income> Incomes { get; set; }
+        public DbSet<Spent> Spents { get; set; }
         public DbSet<Category> Categories { get; set; }
     }
 }
