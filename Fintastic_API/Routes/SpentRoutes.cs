@@ -45,5 +45,3 @@ namespace Fintastic_API.Routes
         }
     }
 }
-
-}
