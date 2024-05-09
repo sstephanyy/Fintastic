@@ -18,7 +18,7 @@ namespace Fintastic_API.Routes
                 var income = await _incomeService.GetRegisterById(id);
                 if (income != null) return Results.Ok(income);
                 return Results.NotFound();
-            }).WithTags("Receita").WithName("AddSpentsById");
+            }).WithTags("Receita").WithName("AddIncomeById");
 
             endpoints.MapPost("/receita", async (Income income, IService<Income> _incomeService) =>
             {
