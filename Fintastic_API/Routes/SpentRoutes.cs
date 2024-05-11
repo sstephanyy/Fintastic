@@ -8,39 +8,40 @@ namespace Fintastic_API.Routes
     {
         public static void MapSpentRoutes(this IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapPost("/spents", async (Spent spent, IService<Spent> _spentService) =>
-            {
-                if (spent == null) TypedResults.BadRequest();
-                await _spentService.AddRegister(spent);
-                return Results.Created($"{spent.SpendingId}", spent);
-            }).WithName("AddSpents");
 
-            endpoints.MapGet("/spents", async (IService<Spent> _spentService) =>
+            endpoints.MapGet("/despesas", async (IService<Spent> _spentService) =>
             {
                 var spentList = await _spentService.GetRegisters();
                 return Results.Ok(spentList);
-            }).WithName("GetSpents");
+            }).WithTags("Despesa").WithName("GetSpents");
 
-            endpoints.MapGet("/spents/{id}", async (IService<Spent> _spentService, int id) =>
+            endpoints.MapGet("/despesas/{id}", async (IService<Spent> _spentService, int id) =>
             {
                 var spent = await _spentService.GetRegisterById(id);
                 if (spent != null) return Results.Ok(spent);
                 return Results.NotFound();
-            }).WithName("GetSpentById");
+            }).WithTags("Despesa").WithName("GetSpentById");
 
-            endpoints.MapPut("/spents/{id}", async (IService<Spent> _spentService, int id, Spent spent) =>
+            endpoints.MapPost("/despesas", async (Spent spent, IService<Spent> _spentService) =>
+            {
+                if (spent == null) TypedResults.BadRequest();
+                await _spentService.AddRegister(spent);
+                return Results.Created($"{spent.SpendingId}", spent);
+            }).WithTags("Despesa").WithName("AddSpents");
+
+            endpoints.MapPut("/despesas/{id}", async (IService<Spent> _spentService, int id, Spent spent) =>
             {
                 var updatedSpent = await _spentService.UpdateRegister(id, spent);
                 if (updatedSpent != null) return Results.Ok(updatedSpent);
                 return Results.NotFound();
-            }).WithName("UpdateSpent");
+            }).WithTags("Despesa").WithName("UpdateSpent");
 
-            endpoints.MapDelete("/spents/{id}", async (IService<Spent> _spentService, int id) =>
+            endpoints.MapDelete("/despesas/{id}", async (IService<Spent> _spentService, int id) =>
             {
                 var deleteResult = await _spentService.DeleteRegister(id);
                 if (deleteResult) return Results.Ok();
                 return Results.NotFound();
-            }).WithName("DeleteSpents");
+            }).WithTags("Despesa").WithName("DeleteSpents");
 
         }
     }
