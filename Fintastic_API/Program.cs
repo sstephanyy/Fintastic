@@ -18,6 +18,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IService<Spent>, SpentService>();
 builder.Services.AddScoped<IService<Income>, IncomeService>();
+builder.Services.AddScoped<IService<Category>, CategoryService>();
 
 var app = builder.Build();
 
