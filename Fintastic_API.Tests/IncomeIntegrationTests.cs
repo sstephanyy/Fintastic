@@ -142,6 +142,8 @@ namespace Fintastic_API.Tests
             var incomeAlterada = await client.GetFromJsonAsync<Income>(url);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("Salário alterado para AGOSTO", incomeAlterada.Description);
+            Assert.Equal(7000, incomeAlterada.Amount);
         }
 
 
