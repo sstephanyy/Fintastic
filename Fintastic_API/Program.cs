@@ -6,6 +6,7 @@ using Fintastic_API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -36,6 +37,8 @@ app.MapCategoryRoutes();
 app.MapIncomeRoutes();
 app.MapSpentRoutes();
 
+
 app.Run();
 
 
+public partial class Program { }
