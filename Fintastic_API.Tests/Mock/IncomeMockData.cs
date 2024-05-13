@@ -2,13 +2,9 @@
 using Fintastic_API.Models;
 using Fintastic_API.Tests.Helpers;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Fintastic_API.Tests
+
+namespace Fintastic_API.Tests.Mock
 {
     public class IncomeMockData
     {

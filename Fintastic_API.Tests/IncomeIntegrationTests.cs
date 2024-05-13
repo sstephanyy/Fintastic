@@ -1,5 +1,6 @@
 using Fintastic_API.Models;
 using Fintastic_API.Tests.Helpers;
+using Fintastic_API.Tests.Mock;
 using FluentAssertions;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
@@ -19,8 +20,10 @@ namespace Fintastic_API.Tests
                 await using var application = new MockDb();
 
                 await IncomeMockData.CreateIncomes(application, true);
+                await CategoryMockData.CreateCategories(application, true); 
 
-                var income = new Income
+
+            var income = new Income
                 {
                     IncomeId = 12,
                     Description = "Salário de Maio",
@@ -115,6 +118,31 @@ namespace Fintastic_API.Tests
 
         }
 
+        [Fact]
+        public async Task PUT_Update_Existing_Income()
+        {
+            await using var application = new MockDb();
+
+            await IncomeMockData.CreateIncomes(application, true);
+
+            var client = application.CreateClient();
+            var url = "/receita/11";
+
+            var income = new Income
+            {
+                IncomeId = 11,
+                Description = "Salário alterado para AGOSTO",
+                Amount = 7000,
+                CategoryId = 1,
+                TransactionDate = new DateTime(2024, 5, 1)
+            };
+
+            var response = await client.PutAsJsonAsync(url, income);
+
+            var incomeAlterada = await client.GetFromJsonAsync<Income>(url);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
 
 
 
