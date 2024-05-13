@@ -27,7 +27,7 @@ namespace Fintastic_API.Tests.Mock
                         await categoryDbContext.Categories.AddAsync(new Category
                         {
                             CategoryId = 1,
-                            Title = "Salary",
+                            Title = "Salario",
                             Icon = "💰",
                             Type = CategoryType.Income
                         });
@@ -35,9 +35,25 @@ namespace Fintastic_API.Tests.Mock
                         await categoryDbContext.Categories.AddAsync(new Category
                         {
                             CategoryId = 2,
-                            Title = "Dividends",
+                            Title = "Dividendos",
                             Icon = "💸",
                             Type = CategoryType.Income
+                        });
+
+                        await categoryDbContext.Categories.AddAsync(new Category
+                        {
+                            CategoryId = 3,
+                            Title = "Alimentação",
+                            Icon = "🍔",
+                            Type = CategoryType.Expense
+                        });
+
+                        await categoryDbContext.Categories.AddAsync(new Category
+                        {
+                            CategoryId = 4,
+                            Title = "Transporte",
+                            Icon = "🚗",
+                            Type = CategoryType.Expense
                         });
 
                         await categoryDbContext.SaveChangesAsync();
