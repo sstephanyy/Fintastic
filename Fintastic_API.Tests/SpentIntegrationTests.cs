@@ -54,6 +54,7 @@ namespace Fintastic_API.Tests
         {
             await using var application = new MockDb();
             await SpentMockData.CreateSpents(application, true);
+            await CategoryMockData.CreateCategories(application, true);
 
             var client = application.CreateClient();
             var url = "/despesas";
