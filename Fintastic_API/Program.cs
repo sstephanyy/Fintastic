@@ -20,6 +20,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<IService<Spent>, SpentService>();
 builder.Services.AddScoped<IService<Income>, IncomeService>();
 builder.Services.AddScoped<IService<Category>, CategoryService>();
+builder.Services.AddScoped<IBalance<Balance>, BalanceService>();
 
 var app = builder.Build();
 
@@ -36,6 +37,7 @@ app.UseHttpsRedirection();
 app.MapCategoryRoutes();
 app.MapIncomeRoutes();
 app.MapSpentRoutes();
+app.MapBalanceRoutes();
 
 
 app.Run();
